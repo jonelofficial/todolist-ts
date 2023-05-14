@@ -16,14 +16,24 @@ const TodoLists = ({ onRemoveTodo, onUpdateTodo, todos }: TodoListsProps) => {
               key={i}
               style={{
                 textDecoration: !status ? "line-through" : "",
-                cursor: "pointer",
               }}
-              onClick={() => onUpdateTodo(id, !status)}
             >
-              {todo}
-              {"  -  "}
-              {new Date(createdAt).toDateString()}
-              <button onClick={() => onRemoveTodo(id)}>Remove</button>
+              <p
+                style={{ cursor: "pointer", display: "inline" }}
+                onClick={() => onUpdateTodo(id, !status)}
+              >
+                {todo} {"  -  "}
+                {new Date(createdAt).toDateString()}
+              </p>
+
+              {!status && (
+                <button
+                  style={{ marginLeft: "1em" }}
+                  onClick={() => onRemoveTodo(id)}
+                >
+                  Remove
+                </button>
+              )}
             </li>
           );
         })}

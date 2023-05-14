@@ -7,9 +7,20 @@ interface TodoFormProps {
 const TodoForm = ({ onSubmitForm }: TodoFormProps) => {
   const [todo, setTodo] = useState("");
   return (
-    <form onSubmit={(e) => onSubmitForm(e, todo)} method="post">
-      <label htmlFor="todo">Create Todo</label>
-      <input type="text" id="todo" onChange={(e) => setTodo(e.target.value)} />
+    <form
+      onSubmit={(e) => {
+        onSubmitForm(e, todo);
+        setTodo("");
+      }}
+      method="post"
+    >
+      <label htmlFor="todo">Todo Text</label>
+      <input
+        type="text"
+        id="todo"
+        value={todo}
+        onChange={(e) => setTodo(e.target.value)}
+      />
       <button type="submit">Add Todo</button>
     </form>
   );

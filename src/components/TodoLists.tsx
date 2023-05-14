@@ -2,10 +2,11 @@ import { Todos } from "../model/Todos";
 
 interface TodoListsProps {
   onRemoveTodo: (id: string) => void;
+  onUpdateTodo: (id: string, status: boolean) => void;
   todos: Todos[];
 }
 
-const TodoLists = ({ onRemoveTodo, todos }: TodoListsProps) => {
+const TodoLists = ({ onRemoveTodo, onUpdateTodo, todos }: TodoListsProps) => {
   return (
     <>
       <ul>
@@ -13,21 +14,16 @@ const TodoLists = ({ onRemoveTodo, todos }: TodoListsProps) => {
           return (
             <li
               key={i}
-              style={{ textDecoration: !status ? "line-through" : "" }}
+              style={{
+                textDecoration: !status ? "line-through" : "",
+                cursor: "pointer",
+              }}
+              onClick={() => onUpdateTodo(id, !status)}
             >
-              Todo: {todo}
-              Date: {new Date(createdAt).toDateString()}
-              {status ? (
-                <>
-                  <button onClick={() => onRemoveTodo(id)}>Done</button>
-                  <button onClick={() => onRemoveTodo(id)}>Remove</button>
-                </>
-              ) : (
-                <>
-                  <button onClick={() => onRemoveTodo(id)}>Active</button>
-                  <button onClick={() => onRemoveTodo(id)}>Remove</button>
-                </>
-              )}
+              {todo}
+              {"  -  "}
+              {new Date(createdAt).toDateString()}
+              <button onClick={() => onRemoveTodo(id)}>Remove</button>
             </li>
           );
         })}

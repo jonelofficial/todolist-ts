@@ -18,8 +18,8 @@ const TodoService = {
     const response = await http.delete(`/Id/${id}`);
     return response.data;
   },
-  updateTodo: async (id: string) => {
-    const response = await http.put(`/Id/${id}`);
+  updateTodo: async (id: string, status: boolean) => {
+    const response = await http.put(`/Id/${id}`, { status: status });
     return response.data;
   },
 };
